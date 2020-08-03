@@ -33,7 +33,7 @@ class Card extends React.Component {
         <div className="company">{profile.company}</div>
       </div>
       <div>
-          <button onClick={this.props.handleRemove}>remove {profile.id}</button>
+          <button onClick={() => {this.props.handleRemove(profile.id)}} > remove {profile.id}</button>
       </div>
     </div>
     );
@@ -76,19 +76,18 @@ class App extends React.Component {
     this.handleRemove = this.handleRemove.bind(this);
   }
 
-
   addNewProfile = (profileData) => {
     this.setState( (prevState) => ({
       profiles: [...prevState.profiles, profileData],
     }));
   };
 
-  handleRemove() {
-    if (this.state.profiles.length > 0) {
+  handleRemove(profileId) {
       let newProfiles = this.state.profiles;
-      newProfiles = newProfiles.filter(profile => profile.id === newProfiles);
+      console.log(newProfiles);
+      newProfiles = newProfiles.filter(profile => profile.id !== profileId);
+      console.log(newProfiles);
       this.setState({profiles: newProfiles});
-    }
   }
 
   render() {
